@@ -18,9 +18,6 @@ IMAGE_INSTALL = " \
     initramfs-module-tpm \
     initramfs-module-tpm2 \
     initramfs-module-selinux \
-    kernel-module-tpm \
-    kernel-module-tpm-tis \
-    kernel-module-tpm-tis-core \
 "
 IMAGE_LINGUAS = "en-us"
 

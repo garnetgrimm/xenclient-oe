@@ -1,5 +1,6 @@
 require recipes-kernel/linux/linux-openxt-copy-objtool.inc
 require classes/kernel-module-signing.bbclass
+require classes/ima-evm-rootfs.bbclass
 
 DEPENDS += "bc-native"
 

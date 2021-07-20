@@ -7,6 +7,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     openssh \
+    ima-policy \
     openssh-sshd-tcp-init \
     util-linux-mount \
     util-linux-umount \
