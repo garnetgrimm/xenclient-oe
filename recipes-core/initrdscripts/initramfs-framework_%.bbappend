@@ -6,7 +6,7 @@ SRC_URI += " \
     file://bootfs \
     file://tpm \
     file://tpm2 \
-    file://selinux \
+    file://integrity \
     "
 
 do_install_append() {
@@ -28,8 +28,8 @@ do_install_append() {
     # tpm2
     install -m 0755 ${WORKDIR}/tpm2 ${D}/init.d/92-tpm2
 
-    # selinux
-    install -m 0755 ${WORKDIR}/selinux ${D}/init.d/93-selinux
+    # integrity
+    install -m 0755 ${WORKDIR}/integrity ${D}/init.d/93-integrity
 }
 
 PACKAGES += " \
@@ -37,7 +37,7 @@ PACKAGES += " \
             initramfs-module-bootfs \
             initramfs-module-tpm \
             initramfs-module-tpm2 \
-            initramfs-module-selinux \
+            initramfs-module-integrity \
             "
 
 SUMMARY_initramfs-module-functions = "initramfs support for functions"
@@ -60,6 +60,6 @@ SUMMARY_initramfs-module-tpm2 = "initramfs support for tpm2"
 RDEPENDS_initramfs-module-tpm2 = "${PN}-base initramfs-module-bootfs tpm2-tools-initrd"
 FILES_initramfs-module-tpm2 = "/init.d/92-tpm2"
 
-SUMMARY_initramfs-module-selinux = "initramfs support for selinux"
-RDEPENDS_initramfs-module-selinux = "${PN}-base"
-FILES_initramfs-module-selinux = "/init.d/93-selinux"
+SUMMARY_initramfs-module-integrity = "initramfs support for the lsm"
+RDEPENDS_initramfs-module-integrity = "${PN}-base"
+FILES_initramfs-module-integrity = "/init.d/93-integrity"

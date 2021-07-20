@@ -7,6 +7,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     openssh \
+    ima-policy \
     openssh-sshd-tcp-init \
     util-linux-mount \
     util-linux-umount \
@@ -68,7 +69,7 @@ RDEPENDS_${PN} = " \
     xenclient-sec-scripts \
     pmtools \
     svirt-interpose \
-    selinux-load \
+    integrity-load \
     ethtool \
     intel-microcode \
     rsyslog \

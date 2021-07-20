@@ -423,6 +423,24 @@ load_modules
 # for setting up a recovery shell
 unlock_config
 
+# In theory, a simple "cat" should be enough. In practice, loading sometimes fails randomly
+# ("[Linux-ima-user] IMA policy loading via cat") and we get better error reporting when
+# checking the write of each line. To minimize the risk of policy loading going wrong we
+# also remove comments and blank lines ourselves.
+ima_load=true
+ima_conf_file="/config/install/ima.conf"
+if [ -f "$ima_conf_file" ] ; then
+    if cat $ima_conf_file | grep "IMA_ENABLED='false'" -w -q ; then
+        ima_load=false
+    fi
+fi
+
+if [ $ima_load = true ] ; then
+    if ! (set -e; while read i; do if echo "$i" | grep -q -e '^#' -e '^ *$'; then debug "Skipping IMA policy: $i"; else debug "Writing IMA policy: $i"; if echo $i; then sleep ${bootparam_ima_delay:-0}; else fatal "Invalid line in IMA policy: $i"; exit 1; fi; fi; done) </etc/ima/ima-policy >/sys/kernel/security/ima/policy; then
+        fatal "Could not load IMA policy."
+    fi
+fi
+
 restore_firstboot -r /config
 
 if [ "${tpm2}" -eq 0 ];

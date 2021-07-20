@@ -48,10 +48,11 @@ IMAGE_INSTALL += "\
     devicemodel-stubdom \
     ${@bb.utils.contains('IMAGE_FEATURES', 'debug-tweaks', 'packagegroup-selinux-policycoreutils audit', '' ,d)} \
 "
-
 inherit xenclient-licences
 
 require xenclient-version.inc
+
+inherit kernel-integrity-signing
 
 post_rootfs_shell_commands() {
     mkdir -p ${IMAGE_ROOTFS}/config/etc

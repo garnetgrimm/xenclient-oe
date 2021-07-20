@@ -2,14 +2,14 @@
 # Copyright (C) 2018 Apertus Solutions, LLC
 # Licensed on MIT
 
-selinux_enabled() {
+integrity_enabled() {
     return 0
 }
 
-selinux_run() {
+integrity_run() {
     if [ "${openxt_measured}" = "true" ]; then
         bootparam_init="/sbin/init.root-ro"
     fi
 
-    bootparam_init="/sbin/selinux-load.sh ${bootparam_init:-/sbin/init} ${bootparam_runlevel}"
+    bootparam_init="/sbin/integrity-load.sh ${bootparam_init:-/sbin/init} ${bootparam_runlevel}"
 }
